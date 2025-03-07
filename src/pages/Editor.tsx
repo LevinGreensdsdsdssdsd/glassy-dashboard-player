@@ -7,12 +7,11 @@ import { useCallback, useState } from "react";
 export default function Editor() {
   const [playing, setPlaying] = useState(false);
 
-  const handlePlay = useCallback(() => {
-    setPlaying(true);
-  }, []);
-
-  const handlePause = useCallback(() => {
-    setPlaying(false);
+  const handleStateChange = useCallback((state: {
+    isPlaying: boolean;
+    frame: number;
+  }) => {
+    setPlaying(state.isPlaying);
   }, []);
 
   return (
@@ -31,8 +30,7 @@ export default function Editor() {
             autoPlay
             loop
             controls
-            onPlay={handlePlay}
-            onPause={handlePause}
+            onStateChange={handleStateChange}
           />
         </div>
       </Card>
